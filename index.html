@@ -1,0 +1,172 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        #toolbarContainer { margin-bottom:6px; }
+        #fsFrame { width:100%; border: 0px solid #0094ff; border-radius:3px; }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0rem 1rem;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggler" aria-controls="navToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navToggler">
+        <!-- name and icon -->
+        <a class="navbar-brand" href="./">
+            <!-- <img src="https://i.imgur.com/tJXgC8d.png" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+            <i class="d-inline-block align-top fas fa-home" style="font-size: 30px; color: #007dff;"></i> 
+            brand
+        </a>
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <!-- static dropdown -->
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-robot"></i> Bootstrap
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navDropdown">
+                <a class="dropdown-item" target="fsFrame" href="https://getbootstrap.com/docs/4.1/getting-started/introduction/">Introduction</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" target="fsFrame" href="https://getbootstrap.com/docs/4.1/components/alerts/">Alerts</a>
+                <a class="dropdown-item" target="fsFrame" href="https://getbootstrap.com/docs/4.1/components/badge/">Badges</a>
+                <a class="dropdown-item" target="fsFrame" href="https://getbootstrap.com/docs/4.1/components/breadcrumb/">Breadcrumb</a>
+            </div>
+            </li>
+            <!-- dynamic dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="miners">
+                    <i class="fas fa-chess-rook"></i> Dynamic Menu <span class="caret"></span>
+                </a>
+                <div id="dynamic-menu" class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
+            </li>
+        </ul>
+        <!-- right nav bar-->
+        <ul class="nav navbar-nav ml-auto">
+            <!-- about -->
+            <li class="nav-item" id="btnAbout" data-toggle='tooltip' data-placement='bottom' data-original-title=''>
+                <a href="" class="nav-link" data-toggle="modal" data-target="#aboutModal"><i class="fas fa-info"></i></a>
+            </li>
+        </ul>
+
+      </div>
+    </nav>
+    <!-- full screen iframe -->
+    <div class="container-fluid p-0">
+        <iframe id="fsFrame" srcdoc="Blank<br>Please select menu item"></iframe>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  
+    <script>
+        $(function () {
+            document.getElementById('fsFrame').style.height = 'calc(100vh - ' + ($('#fsFrame').offset().top + 25) + 'px)';            
+        });
+    </script>
+
+    <!-- menu 2 -->
+    <script type="text/javascript">
+        // master miner menu - WIP
+        $.getJSON('https://next.json-generator.com/api/json/get/EyZSYe2R4', function(data) {
+            var builddata = function() {
+                var source = [];
+                var items = [];
+                for (i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var label = item["name"];
+                    var parentid = item["parent_id"];
+                    var icon = item["icon"];
+                    var id = item["id"];
+                    var url = item["url"];
+
+                    if (items[parentid]) {
+                        var item = {
+                            parentid: parentid,
+                            label: label,
+                            url: url,
+                            icon: icon,
+                            item: item
+                        };
+                        if (!items[parentid].items) {
+                            items[parentid].items = [];
+                        }
+                        items[parentid].items[items[parentid].items.length] = item;
+                        items[id] = item;
+                    } else {
+                        items[id] = {
+                            parentid: parentid,
+                            label: label,
+                            url: url,
+                            icon: icon,
+                            item: item
+                        };
+                        source[id] = items[id];
+                    }
+                }
+                return source;
+            }
+            // build dynamic menu from json payload
+            var buildMenu = function(menu, source) {
+                var isFirst = true;
+                $.each(source, function() {
+                    if (this.label) {
+                        if (!isFirst) {
+                            var divider = $('<div class="dropdown-divider"></div>');
+                            menu.append(divider);
+                        }
+                        var parent = $('<a class="dropdown-item" target="fsFrame" href="' + this.url + '"><i class="text-muted ' + this.icon + '"></i>  ' + this.label + '</a>');
+                        menu.append(parent);
+                        if (this.items && this.items.length > 0) {
+                            $.each(this.items, function() {
+                                var child = $('<a class="dropdown-item" target="fsFrame" href="' + this.url + '"><i class="text-muted ' + this.icon + '" ></i>  ' + this.label + '</a>');
+                                menu.append(child);
+                            });
+                        }
+                        isFirst = false;
+                    }
+                });
+            }
+            var source = builddata();
+            //console.log(source);
+            buildMenu($('#dynamic-menu'), source);
+        });
+    </script>
+
+  </body>
+</html>
+
+<!-- About Modal -->
+<div class="modal fade bd-about-modal-lg" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true" aria-keyboard="false" bd-about-modal-lg id="aboutModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aboutModalLabel">About</h5>
+                <a class="btn btn-inf active close" data-dismiss="modal" role="button" data-pressed="true">&times;</a>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <a href="https://github.com/Creepsky/creepMiner" target="blank_">
+                        <img class="img-responsive center-block" alt="creepMiner" src="data:image/png;base64,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"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
