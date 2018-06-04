@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="www.frebsite.nl" />
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+		<title>mhead</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/7.0.3/jquery.mmenu.all.css">
+		<link rel="stylesheet" type="text/css" href="css/demo.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/0.9.3/hamburgers.min.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Pacifico" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery.mhead@1.0.1/dist/jquery.mhead.css">
+		<style type="text/css">
+			#fsFrame{width:100%;border:0 solid #0094ff;border-radius:3px}
+			.mh-head{background:transparent}
+			.mh-head .hamburger-inner,
+			.mh-head .hamburger-inner:after, 
+			.mh-head .hamburger-inner:before{background: #696969;}
+			.mm-menu{width:100% !important;}
+		</style>
+	</head>
+	<body>
+		<div id="page">
+			<div class="mh-head first Sticky">
+				<span class="mh-btns-right">
+					<a class="mh-hamburger" href="#menu"></a>
+				</span>
+			</div>
+		    <!-- full screen iframe -->
+	        <iframe id="fsFrame" srcdoc="<center><strong>Blank continer<br /><code>Please use the navigation<br />page to load something</code></center>"></iframe>
+			<nav id="menu">
+				<div id="panel-menu">
+					<ul>
+						<li><a target="fsFrame" href="http://themes.getbootstrap.com/preview/?theme_id=1719">Link #1</a></li>
+						<li><a target="fsFrame" href="https://bootswatch.com/default/">Link #2</a></li>
+						<li><a target="fsFrame" href="http://192.168.1.50">Link #3</a></li>
+						<li><span>About us</span>
+							<ul>
+								<li><a href="#/about/history">History</a></li>
+								<li><span>The team</span>
+									<ul>
+										<li><a href="#/about/team/management">Management</a></li>
+										<li><a href="#/about/team/sales">Sales</a></li>
+										<li><a href="#/about/team/development">Development</a></li>
+									</ul>
+								</li>
+								<li><a href="#/about/address">Our address</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div id="panel-account">
+					<ul>
+						<li><a href="#/">My profile</a></li>
+						<li><a href="#/">Privacy settings</a></li>
+						<li><a href="#/">Activity</a></li>
+						<li><a href="#/">Sign out</a></li>
+					</ul>
+				</div>
+				<div id="panel-cart">
+					<p style="text-align: center; padding-top: 30px;">Your shoppingcart is empty.<br />
+						<a href="#/">Continue shopping.</a></p>
+				</div>
+			</nav>
+
+		</div>
+	    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/7.0.3/jquery.mmenu.all.js"></script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/7.0.3/wrappers/bootstrap/jquery.mmenu.bootstrap4.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery.mhead@1.0.1/dist/jquery.mhead.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				document.getElementById('fsFrame').style.height = 'calc(100vh - ' + ($('#fsFrame').offset().top + 25) + 'px)';
+				//	create a menu
+				$('#menu').mmenu({
+					extensions: ["theme-light","position-right"],
+					setSelected	: true,
+					counters	: true,
+					navbars		: [
+						//{
+						//	content		: [ 'searchfield' ]
+						//}, 
+						{
+							type		: 'tabs',
+							content		: [ 
+								'<a href="#panel-menu"><i class="fa fa-bars"></i> <span>Menu</span></a>', 
+								'<a href="#panel-account"><i class="fa fa-user"></i> <span>Account</span></a>', 
+								'<a href="#panel-cart"><i class="fa fa-shopping-cart"></i> <span>Cart</span></a>'
+							]
+						}, 
+						//{
+						//	content		: [ 'prev', 'breadcrumbs', 'close' ]
+						//}, 
+						{
+							position	: 'bottom',
+							content		: [ '<center><i class="fas fa-sun"></i><b>&nbsp;freakig awsome&nbsp;</b><i class="fas fa-sun"></i></center>' ]
+						}
+					]
+				});
+
+				//	fire the plugin
+				$('.mh-head.first').mhead({
+					scroll: {
+						hide: 200
+					}
+				});
+
+				//	for demo only
+				$('a[href^="#/"]').click(function() {
+					alert( 'Thank you for clicking, but that\'s a demo link.' );
+					return;
+				})
+			});
+		</script>
+	</body>
+</html>
